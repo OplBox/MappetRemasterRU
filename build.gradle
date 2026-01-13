@@ -335,3 +335,8 @@ task copyLangStrings {
         print("Done!")
     }
 }
+
+// Добавлено вручную для поддержки локальных библиотек
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
