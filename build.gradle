@@ -15,6 +15,12 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'com.github.johnrengelman.shadow'
 
+repositories {
+    flatDir {
+        dirs "run/libs"
+    }
+}
+
 version = project.version
 
 var dev = "dev"
@@ -66,10 +72,10 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
 
-    compileOnly files("run/libs/blockbuster-${blockbuster}-${mcversion}-dev.jar")
-    compileOnly files("run/libs/metamorph-${metamorph}-${mcversion}-dev.jar")
-    compileOnly files("run/libs/mclib-${mclib}-${mcversion}-dev.jar")
-    compileOnly files("run/libs/aperture-${aperture}-${mcversion}-dev.jar")
+    compileOnly name: "blockbuster-${blockbuster}-${mcversion}-dev"
+    compileOnly name: "metamorph-${metamorph}-${mcversion}-dev"
+    compileOnly name: "mclib-${mclib}-${mcversion}-dev"
+    compileOnly name: "aperture-${aperture}-${mcversion}"
     implementation("org.reflections:reflections:0.10.2")
     implementation("net.minecraftforge:mergetool:0.2.3.3") { force = true }
 
@@ -336,7 +342,4 @@ task copyLangStrings {
     }
 }
 
-// Добавлено вручную для поддержки локальных библиотек
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-}
+
